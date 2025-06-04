@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import g.p.smartcalculater.R;
 import jnr.ffi.annotations.In;
 
 public class SeedPhraseActivity extends Activity {

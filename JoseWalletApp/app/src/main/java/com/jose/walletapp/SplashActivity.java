@@ -7,6 +7,9 @@ import android.os.Bundle;
 
 import com.jose.walletapp.helpers.MnemonicGenerator;
 
+import g.p.smartcalculater.R;
+
+
 public class SplashActivity extends Activity {
     private static Context context;
 

@@ -1,10 +1,14 @@
 package com.jose.walletapp.helpers;
 
+
 import static com.jose.walletapp.constants.Constants.INFURA_KEY;
 
 import android.content.Context;
 
 import android.util.Log;
+
+import org.p2p.solanaj.core.PublicKey;
+import org.p2p.solanaj.rpc.RpcClient;
 import org.web3j.crypto.*;
 import org.bitcoinj.crypto.MnemonicCode;
 import org.bitcoinj.crypto.MnemonicException;
@@ -27,6 +31,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.List;
 
 public class HdWalletHelper {
@@ -65,6 +70,27 @@ public class HdWalletHelper {
         ECKeyStorage.savePrivateKey(context,credentials.getEcKeyPair().getPrivateKey());
     }
 
+    public static Credentials loginFromMnemonic(Context context,String mnemonic) throws Exception {
+        // Validate mnemonic
+        List<String> words = Arrays.asList(mnemonic.trim().split(" "));
+        MnemonicCode.INSTANCE.check(words);
+
+        // Generate seed from mnemonic
+        byte[] seed = MnemonicCode.toSeed(words, "");
+
+        // Derive master key
+        Bip32ECKeyPair masterKeypair = Bip32ECKeyPair.generateKeyPair(seed);
+
+        // Derivation path for Ethereum/Polygon/Avalanche
+        final int[] derivationPath = {44 | 0x80000000, 60 | 0x80000000, 0 | 0x80000000, 0, 0};
+        Bip32ECKeyPair derivedKeyPair = Bip32ECKeyPair.deriveKeyPair(masterKeypair, derivationPath);
+
+        // Load credentials (private key, address)
+        Credentials credentials = Credentials.create(derivedKeyPair);
+
+        System.out.println("Wallet Address: " + credentials.getAddress());
+        return credentials;
+    }
 
     public static String getMyAddress(Context context) {
         Credentials credentials = null;
@@ -106,6 +132,18 @@ public class HdWalletHelper {
         }
     }
 
+    public static Double getSolanaBalance(String address){
+        RpcClient rpcClient=new RpcClient("https://api.mainnet-beta.solana.com");
+        try{
+            PublicKey publicKey=new PublicKey(address);
+            Double solBalance=rpcClient.getApi().getBalance(publicKey)/1_000_000_000.0;
+            return solBalance;
+        } catch (Exception e) {
+           // throw new RuntimeException(e);
+            return null;
+        }
+
+    }
     public static BigDecimal getMaticBalance(String address){
         Web3j web3 = Web3j.build(new HttpService("https://polygon-mainnet.infura.io/v3/"+INFURA_KEY));
         EthGetBalance balanceWei = null;

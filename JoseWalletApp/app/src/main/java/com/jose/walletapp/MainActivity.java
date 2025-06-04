@@ -1,5 +1,6 @@
 package com.jose.walletapp;
 
+
 import static com.jose.walletapp.helpers.MnemonicGenerator.saveMnemonic;
 
 import android.app.Activity;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
 
 import com.jose.walletapp.helpers.ECKeyStorage;
 import com.jose.walletapp.helpers.HdWalletHelper;
@@ -16,6 +18,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import g.p.smartcalculater.R;
 import okhttp3.Credentials;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -118,7 +121,12 @@ public class MainActivity extends Activity {
 
             }
         });
-
+        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+        });
 
     }
 

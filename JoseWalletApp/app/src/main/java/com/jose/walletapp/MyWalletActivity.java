@@ -17,11 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.jose.walletapp.helpers.ECKeyStorage;
-import com.jose.walletapp.helpers.HdWalletHelper;
 //import com.walletconnect.android.internal.common.model.Namespace;
 //import com.walletconnect.walletconnectv2.clientsync.session.Session;
 //import com.walletconnect.walletconnectv2.clientsync.session.after.params.SessionRequest;
+import com.jose.walletapp.helpers.HdWalletHelper;
 import com.walletconnect.web3.wallet.client.Wallet;
 import com.walletconnect.web3.wallet.client.Web3Wallet;
 
@@ -32,6 +31,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import g.p.smartcalculater.R;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import okhttp3.*;
@@ -122,7 +122,7 @@ public class MyWalletActivity extends Activity {
 
 */
 
-        myAddressStr=HdWalletHelper.getMyAddress(context);
+        myAddressStr= HdWalletHelper.getMyAddress(context);
         totalBalance=findViewById(R.id.totalBalance);
         totalMaticBalance=findViewById(R.id.assetFiatValue);
         usdtAsset=findViewById(R.id.assetUsdt);

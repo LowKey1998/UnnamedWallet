@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.jose.walletapp.R;
+import g.p.smartcalculater.R;
 
 
 public class PinEntryKeypad extends LinearLayout implements View.OnClickListener {

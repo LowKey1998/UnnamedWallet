@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
 import com.jose.walletapp.helpers.HdWalletHelper;
-import com.jose.walletapp.helpers.MnemonicGenerator;
+
+import g.p.smartcalculater.R;
 
 public class SendCryptoActivity extends Activity {
     private static Context context;

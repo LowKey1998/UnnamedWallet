@@ -17,7 +17,7 @@
         android:theme="@style/Theme.WalletApp"
         tools:targetApi="31" >
 
-        <activity android:name=".SplashActivity"
+        <activity android:name="com.jose.walletapp.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,9 +26,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".SendCryptoActivity"/>
-        <activity android:name=".MyWalletActivity"
+        <activity android:name="com.jose.walletapp.MainActivity"/>
+        <activity android:name="com.jose.walletapp.LoginActivity"/>
+        <activity android:name="com.jose.walletapp.SendCryptoActivity"/>
+        <activity android:name="com.jose.walletapp.MyWalletActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -39,7 +40,7 @@
                     android:host="wc"/>
             </intent-filter>
         </activity>
-        <activity android:name=".SeedPhraseActivity"/>
+        <activity android:name="com.jose.walletapp.SeedPhraseActivity"/>
 
 
     </application>
