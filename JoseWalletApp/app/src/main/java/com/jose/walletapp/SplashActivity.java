@@ -31,7 +31,7 @@ public class SplashActivity extends Activity {
                         startActivityForResult(intent, 2);
                     }
                     else {
-                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                         startActivityForResult(intent, 2);
                     }
 

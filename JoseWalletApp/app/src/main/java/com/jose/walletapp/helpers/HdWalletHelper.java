@@ -92,6 +92,7 @@ public class HdWalletHelper {
         return credentials;
     }
 
+
     public static String getMyAddress(Context context) {
         Credentials credentials = null;
         try {
@@ -106,6 +107,12 @@ public class HdWalletHelper {
         return myAddress;
     }
 
+
+
+    public static String getMySolanaAddress(Context context) {
+
+        return null;
+    }
 
 
 

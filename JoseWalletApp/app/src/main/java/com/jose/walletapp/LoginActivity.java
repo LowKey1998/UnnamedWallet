@@ -14,9 +14,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.flexbox.FlexboxLayout;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jose.walletapp.helpers.HdWalletHelper;
 
@@ -80,12 +84,12 @@ public class LoginActivity extends Activity {
             startActivity(new Intent(this,MainActivity.class));
             finish();
         }
-        email=findViewById(R.id.l_email);
-        password=findViewById(R.id.l_password);
+        email=findViewById(R.id.emailInput);
+        password=findViewById(R.id.passwordInput);
         fa=FirebaseAuth.getInstance();
 
         findViewById(R.id.loginButton).setOnClickListener(v -> {
-            StringBuilder phrase = new StringBuilder();
+            /*StringBuilder phrase = new StringBuilder();
             for (EditText e : wordInputs) {
                 String word = e.getText().toString().trim();
                 if (word.isEmpty()) {
@@ -95,7 +99,7 @@ public class LoginActivity extends Activity {
                 phrase.append(word).append(" ");
             }
             String finalPhrase = phrase.toString().trim();
-            Log.d("MNEMONIC", "Phrase: " + finalPhrase);
+            Log.d("MNEMONIC", "Phrase: " + finalPhrase);*/
 
             // TODO: Handle login with phrase
             try {
@@ -110,7 +114,7 @@ public class LoginActivity extends Activity {
         });
     }
 
-    public void loginClicked(View view){
+    public void loginClicked(){
         final String emailString=email.getText().toString();
         if (!emailString.trim().isEmpty() && !password.getText().toString().trim().isEmpty()) {
             //if some requirements met create a signed in user
@@ -120,7 +124,7 @@ public class LoginActivity extends Activity {
                     if (task.isSuccessful()) {
                         getPreferences(0).edit().putString("email",emailString).commit();
                         Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Login.this, MainActivity.class));
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     } else {
                         Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
                     }
