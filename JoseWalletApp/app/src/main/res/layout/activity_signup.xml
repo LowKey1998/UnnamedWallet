@@ -31,7 +31,7 @@
             android:layout_marginTop="24dp" />
 
         <!-- Username -->
-        <EditText
+       <!-- <EditText
             android:id="@+id/usernameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             android:layout_marginTop="24dp"
             android:background="@drawable/input_background"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="16sp" />-->
 
         <!-- Email -->
         <EditText
@@ -70,7 +70,7 @@
             android:textSize="16sp" />
 
         <!-- Confirm Password -->
-        <EditText
+        <!--<EditText
             android:id="@+id/confirmPasswordInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/input_background"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="16sp" />-->
 
         <!-- Signup Button -->
         <Button

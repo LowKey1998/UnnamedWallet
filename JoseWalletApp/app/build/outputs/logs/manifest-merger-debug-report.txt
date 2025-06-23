@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:2:1-48:12
-INJECTED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:2:1-48:12
-INJECTED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:2:1-48:12
-INJECTED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:2:1-48:12
+ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:2:1-49:12
+INJECTED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:2:1-49:12
+INJECTED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:2:1-49:12
+INJECTED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:2:1-49:12
 MERGED from [com.google.android.material:material:1.10.0] /home/user/.gradle/caches/8.11.1/transforms/7c427db87d32ae71dff2254dfa2591d1/transformed/material-1.10.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /home/user/.gradle/caches/8.11.1/transforms/79b53585fb251b879f897ddda26faeff/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /home/user/.gradle/caches/8.11.1/transforms/5894bf32a68bc49e6a4cc228eb6407bb/transformed/constraintlayout-2.0.1/AndroidManifest.xml:2:1-11:12
@@ -125,8 +125,8 @@ MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.1] /h
 	android:name
 		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:5:22-64
 application
-ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:7:5-46:19
-INJECTED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:7:5-46:19
+ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:7:5-47:19
+INJECTED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:7:5-47:19
 MERGED from [com.google.android.material:material:1.10.0] /home/user/.gradle/caches/8.11.1/transforms/7c427db87d32ae71dff2254dfa2591d1/transformed/material-1.10.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.10.0] /home/user/.gradle/caches/8.11.1/transforms/7c427db87d32ae71dff2254dfa2591d1/transformed/material-1.10.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /home/user/.gradle/caches/8.11.1/transforms/5894bf32a68bc49e6a4cc228eb6407bb/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
@@ -243,40 +243,44 @@ activity#com.jose.walletapp.LoginActivity
 ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:30:9-68
 	android:name
 		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:30:19-66
+activity#com.jose.walletapp.SignupActivity
+ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:31:9-69
+	android:name
+		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:31:19-67
 activity#com.jose.walletapp.SendCryptoActivity
-ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:31:9-73
+ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:32:9-73
 	android:name
-		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:31:19-71
+		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:32:19-71
 activity#com.jose.walletapp.MyWalletActivity
-ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:32:9-42:20
+ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:33:9-43:20
 	android:exported
-		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:33:13-36
+		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:34:13-36
 	android:name
-		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:32:19-69
+		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:33:19-69
 intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:wc+data:scheme:mywallet
-ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:34:13-41:29
+ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:35:13-42:29
 action#android.intent.action.VIEW
-ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:35:17-68
+ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:36:17-68
 	android:name
-		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:35:25-66
+		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:36:25-66
 category#android.intent.category.DEFAULT
-ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:36:17-75
+ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:37:17-75
 	android:name
-		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:36:27-73
+		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:37:27-73
 category#android.intent.category.BROWSABLE
-ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:37:17-77
+ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:38:17-77
 	android:name
-		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:37:27-75
+		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:38:27-75
 data
-ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:38:17-40:40
+ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:39:17-41:40
 	android:host
-		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:40:21-38
+		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:41:21-38
 	android:scheme
-		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:39:21-46
+		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:40:21-46
 activity#com.jose.walletapp.SeedPhraseActivity
-ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:43:9-73
+ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:44:9-73
 	android:name
-		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:43:19-71
+		ADDED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml:44:19-71
 uses-sdk
 INJECTED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/user/StudioProjects/UnnamedWallet/JoseWalletApp/app/src/main/AndroidManifest.xml

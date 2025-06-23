@@ -21,6 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 //import com.walletconnect.walletconnectv2.clientsync.session.Session;
 //import com.walletconnect.walletconnectv2.clientsync.session.after.params.SessionRequest;
 import com.jose.walletapp.helpers.HdWalletHelper;
+import com.jose.walletapp.helpers.MultiChainWalletManager;
 import com.walletconnect.web3.wallet.client.Wallet;
 import com.walletconnect.web3.wallet.client.Web3Wallet;
 
@@ -50,6 +51,8 @@ public class MyWalletActivity extends Activity {
     SwipeRefreshLayout swipeRefreshLayout;
     private Thread checkBalanceThread;
     private LinearLayout usdtAsset;
+    private MultiChainWalletManager walletManager;
+    private String ethAddress, solAddress, bscAddress;
     //TextView addressTextView = findViewById(R.id.addressTextView);
     //TextView balanceTextView = findViewById(R.id.balanceTextView);
 
@@ -59,6 +62,111 @@ public class MyWalletActivity extends Activity {
         context = this;
         setContentView(R.layout.main_activity);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+
+        try {
+            MultiChainWalletManager.getInstance().initialize(this, () -> {
+                ethAddress = MultiChainWalletManager.getInstance().getEthAddress();
+                solAddress = MultiChainWalletManager.getInstance().getSolanaAddress();
+                bscAddress = MultiChainWalletManager.getInstance().getBscAddress();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        myAddress=findViewById(R.id.myAddress);
+
+                        Toast.makeText(MyWalletActivity.this, solAddress, Toast.LENGTH_SHORT).show();
+
+                        //ToDo:add statement to check if null
+                        myAddressStr= /*HdWalletHelper.getMyAddress(context);*/solAddress;
+                        Toast.makeText(MyWalletActivity.this, solAddress, Toast.LENGTH_SHORT).show();
+                        myAddress.setText(myAddressStr);
+                        myAddress.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                                ClipData clip = ClipData.newPlainText("Wallet Address", myAddressStr);
+                                clipboard.setPrimaryClip(clip);
+
+                                Toast.makeText(MyWalletActivity.this, "Address copied to clipboard", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        totalBalance=findViewById(R.id.totalBalance);
+                        totalMaticBalance=findViewById(R.id.assetFiatValue);
+                        usdtAsset=findViewById(R.id.assetUsdt);
+                        usdtAsset.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(MyWalletActivity.this, SendCryptoActivity.class));
+                            }
+                        });
+
+
+
+                        checkBalanceThread=new Thread(){
+                            @Override
+                            public void run() {
+                                try {
+
+                                    Toast.makeText(MyWalletActivity.this, myAddressStr, Toast.LENGTH_SHORT).show();
+                                    Double balance = HdWalletHelper.getSolanaBalance(myAddressStr);
+                                    //BigDecimal balanceMatic = HdWalletHelper.getMaticBalance(myAddressStr);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                            totalBalance.setText(balance != null ? ("$" + balance) : "Error ");
+                                            //totalMaticBalance.setText(balanceMatic != null ? ("$" + balanceMatic) : "Error fetching Balance");
+                                            swipeRefreshLayout.setRefreshing(false);
+                                        }
+                                    });
+                                }
+                                catch (Exception e){
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            swipeRefreshLayout.setRefreshing(false);
+                                        }
+                                    });
+                                }
+                            }
+                        };
+
+
+                        // Initial load
+                        swipeRefreshLayout.setRefreshing(true);
+                        checkBalanceThread.start();
+
+                        // Pull-to-refresh handler
+                        swipeRefreshLayout.setOnRefreshListener(() -> checkBalanceThread.start());
+
+                        // totalBalance.setText(balanceStr!=null?("$"+balanceStr):"Problem fetching balance");
+
+
+                    }
+                });
+               // Log.d("WALLET", "ETH: " + eth);
+              //  Log.d("WALLET", "SOL: " + sol);
+                //Log.d("WALLET", "BSC: " + bsc);
+            }, () -> {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Wallet initialization failed", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                Log.e("WALLET", "Wallet initialization failed");
+            });
+        } catch (Exception e) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(), "Wallet creation failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+            e.printStackTrace();
+            Log.e("Wallet", "Wallet creation failed: " + e.getMessage());
+        }
 
         /*Web3Wallet.INSTANCE.setWalletDelegate(new Web3Wallet.WalletDelegate() {
             @Override
@@ -122,67 +230,7 @@ public class MyWalletActivity extends Activity {
 
 */
 
-        myAddressStr= HdWalletHelper.getMyAddress(context);
-        totalBalance=findViewById(R.id.totalBalance);
-        totalMaticBalance=findViewById(R.id.assetFiatValue);
-        usdtAsset=findViewById(R.id.assetUsdt);
-        usdtAsset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MyWalletActivity.this, SendCryptoActivity.class));
-            }
-        });
 
-
-
-        checkBalanceThread=new Thread(){
-            @Override
-            public void run() {
-                try {
-                    BigDecimal balance = HdWalletHelper.getWalletBalance(myAddressStr);
-                    BigDecimal balanceMatic = HdWalletHelper.getMaticBalance(myAddressStr);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            totalBalance.setText(balance != null ? ("$" + balance) : "Error fetching Balance");
-                            totalMaticBalance.setText(balanceMatic != null ? ("$" + balanceMatic) : "Error fetching Balance");
-                            swipeRefreshLayout.setRefreshing(false);
-                        }
-                    });
-                }
-                catch (Exception e){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            swipeRefreshLayout.setRefreshing(false);
-                        }
-                    });
-                }
-            }
-        };
-
-
-        // Initial load
-        swipeRefreshLayout.setRefreshing(true);
-        checkBalanceThread.start();
-
-        // Pull-to-refresh handler
-        swipeRefreshLayout.setOnRefreshListener(() -> checkBalanceThread.start());
-
-       // totalBalance.setText(balanceStr!=null?("$"+balanceStr):"Problem fetching balance");
-
-        myAddress=findViewById(R.id.myAddress);
-        myAddress.setText(myAddressStr);
-        myAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Wallet Address", myAddressStr);
-                clipboard.setPrimaryClip(clip);
-
-                Toast.makeText(MyWalletActivity.this, "Address copied to clipboard", Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
 

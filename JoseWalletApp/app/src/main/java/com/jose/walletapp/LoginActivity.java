@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jose.walletapp.helpers.HdWalletHelper;
+import com.jose.walletapp.helpers.MultiChainWalletManager;
 
 import org.web3j.crypto.Credentials;
 
@@ -88,6 +89,12 @@ public class LoginActivity extends Activity {
         password=findViewById(R.id.passwordInput);
         fa=FirebaseAuth.getInstance();
 
+        findViewById(R.id.signUpText).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+            }
+        });
         findViewById(R.id.loginButton).setOnClickListener(v -> {
             /*StringBuilder phrase = new StringBuilder();
             for (EditText e : wordInputs) {
@@ -102,17 +109,28 @@ public class LoginActivity extends Activity {
             Log.d("MNEMONIC", "Phrase: " + finalPhrase);*/
 
             // TODO: Handle login with phrase
-            try {
-                Credentials userWallet = HdWalletHelper.loginFromMnemonic(LoginActivity.this,finalPhrase);
-                String address = userWallet.getAddress();
-                String privateKey = userWallet.getEcKeyPair().getPrivateKey().toString(16);
-                Log.d("LOGIN", "Address: " + address + "\nPrivate: " + privateKey);
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(this, "Invalid recovery phrase", Toast.LENGTH_SHORT).show();
-            }
+                try {
+                    MultiChainWalletManager.getInstance().initialize(this, () -> {
+                        String eth = MultiChainWalletManager.getInstance().getEthAddress();
+                        String sol = MultiChainWalletManager.getInstance().getSolanaAddress();
+                        String bsc = MultiChainWalletManager.getInstance().getBscAddress();
+
+                        Log.d("WALLET", "ETH: " + eth);
+                        Log.d("WALLET", "SOL: " + sol);
+                        Log.d("WALLET", "BSC: " + bsc);
+                    }, () -> {
+                        Toast.makeText(this, "Wallet initialization failed", Toast.LENGTH_SHORT).show();
+                        Log.e("WALLET", "Wallet initialization failed");
+                    });
+                } catch (Exception e) {
+                    Toast.makeText(this, "Wallet creation failed", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                    Log.e("Wallet", "Wallet creation failed: " + e.getMessage());
+                }
+
         });
     }
+
 
     public void loginClicked(){
         final String emailString=email.getText().toString();

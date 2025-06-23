@@ -219,7 +219,6 @@ id buttonSettings
 id buttonSwap
 id button_settings
 id button_start
-id confirmPasswordInput
 id create
 id editTextAmount
 id editTextFromAmount
@@ -264,7 +263,6 @@ id totalBalance
 id totalBalanceLabel
 id transactions
 id txHash
-id usernameInput
 id walletCard
 layout activity_landing
 layout activity_send_crypto
@@ -426,7 +424,6 @@ string dashboard_title
 string decrypting_wallet
 string default_account_description
 string default_label
-string default_web_client_id
 string description
 string device_rooted
 string dialog_title_exchange

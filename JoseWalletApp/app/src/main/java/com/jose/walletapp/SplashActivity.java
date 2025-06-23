@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.jose.walletapp.helpers.MnemonicGenerator;
 
 import g.p.smartcalculater.R;
@@ -26,7 +27,7 @@ public class SplashActivity extends Activity {
                 try {
                     sleep(1800);
 
-                    if(MnemonicGenerator.getMnemonic(SplashActivity.this)!=null){
+                    if(/*MnemonicGenerator.getMnemonic(SplashActivity.this)*/FirebaseAuth.getInstance().getCurrentUser() !=null){
                         Intent intent = new Intent(SplashActivity.this, MyWalletActivity.class);
                         startActivityForResult(intent, 2);
                     }

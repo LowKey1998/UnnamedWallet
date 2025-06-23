@@ -3341,7 +3341,6 @@ id collapseActionView
 id column
 id column_reverse
 id compress
-id confirmPasswordInput
 id confirm_button
 id container
 id content
@@ -3724,7 +3723,6 @@ id uniform
 id unlabeled
 id up
 id useLogo
-id usernameInput
 id view_offset_helper
 id view_tree_lifecycle_owner
 id view_tree_on_back_pressed_dispatcher_owner
@@ -4150,7 +4148,6 @@ string dashboard_title
 string decrypting_wallet
 string default_account_description
 string default_label
-string default_web_client_id
 string description
 string device_rooted
 string dialog_title_exchange

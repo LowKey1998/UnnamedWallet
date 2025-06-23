@@ -2,7 +2,9 @@ package com.jose.walletapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,22 +18,24 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.jose.walletapp.helpers.MultiChainWalletManager;
 
 import g.p.smartcalculater.R;
 
 public class SignupActivity extends AppCompatActivity {
     FirebaseAuth fa;
     EditText email, password;
-    ImageView signin;
+    Button signin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(g.p.smartcalculater.R.layout.activity_signup);
         fa=FirebaseAuth.getInstance();
-        signin = findViewById(R.id.signin);
-        email=(EditText)findViewById(R.id.email);
-        password=(EditText)findViewById(R.id.password);
+        signin = findViewById(R.id.btnSignUp);
+        email=(EditText)findViewById(R.id.emailInput);
+        password=(EditText)findViewById(R.id.passwordInput);
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,15 +46,17 @@ public class SignupActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // FirebaseDatabase.getInstance().getReference(FirebaseAuth.getInstance().getCurrentUser().getUid() + "/Events").setValue(new ArrayList<String>(Arrays.asList(" ")));
-                                FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+                                user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(getApplicationContext(), "we've sent an email verification link to the email account", Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
+                                createWallet(user);
                                 Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Registration.this, MainActivity.class));
+                                startActivity(new Intent(SignupActivity.this, MyWalletActivity.class));
                             }
                             else {
                                 Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
@@ -65,4 +71,26 @@ public class SignupActivity extends AppCompatActivity {
         });
 
     }
+
+    private void createWallet(FirebaseUser user) {
+        try {
+            MultiChainWalletManager.getInstance().initialize(this, () -> {
+                String eth = MultiChainWalletManager.getInstance().getEthAddress();
+                String sol = MultiChainWalletManager.getInstance().getSolanaAddress();
+                String bsc = MultiChainWalletManager.getInstance().getBscAddress();
+
+                Log.d("WALLET", "ETH: " + eth);
+                Log.d("WALLET", "SOL: " + sol);
+                Log.d("WALLET", "BSC: " + bsc);
+            }, () -> {
+                Toast.makeText(this, "Wallet initialization failed", Toast.LENGTH_SHORT).show();
+                Log.e("WALLET", "Wallet initialization failed");
+            });
+        } catch (Exception e) {
+            Toast.makeText(this, "Wallet creation failed", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+            Log.e("Wallet", "Wallet creation failed: " + e.getMessage());
+        }
+    }
+
 }
