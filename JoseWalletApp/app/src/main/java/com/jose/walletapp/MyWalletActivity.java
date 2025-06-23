@@ -107,7 +107,7 @@ public class MyWalletActivity extends Activity {
                             public void run() {
                                 try {
 
-                                    Toast.makeText(MyWalletActivity.this, myAddressStr, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(MyWalletActivity.this, myAddressStr, Toast.LENGTH_SHORT).show();
                                     Double balance = HdWalletHelper.getSolanaBalance(myAddressStr);
                                     //BigDecimal balanceMatic = HdWalletHelper.getMaticBalance(myAddressStr);
                                     runOnUiThread(new Runnable() {
