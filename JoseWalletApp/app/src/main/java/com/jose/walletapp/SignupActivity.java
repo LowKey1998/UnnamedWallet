@@ -83,9 +83,15 @@ public class SignupActivity extends AppCompatActivity {
                 Log.d("WALLET", "SOL: " + sol);
                 Log.d("WALLET", "BSC: " + bsc);
             }, () -> {
-                Toast.makeText(this, "Wallet initialization failed", Toast.LENGTH_SHORT).show();
-                Log.e("WALLET", "Wallet initialization failed");
-            });
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SignupActivity.this, "Wallet initialization failed", Toast.LENGTH_SHORT).show();
+                        Log.e("WALLET", "Wallet initialization failed");
+
+                    }
+                });
+                });
         } catch (Exception e) {
             Toast.makeText(this, "Wallet creation failed", Toast.LENGTH_SHORT).show();
             e.printStackTrace();

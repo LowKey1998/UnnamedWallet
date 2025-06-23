@@ -66,7 +66,7 @@ public class MultiChainWalletManager {
             String uid = user.getUid();
             String token = result.getToken();
             try {
-                byte[] aesKey = sha256(uid + token);
+                byte[] aesKey = sha256(uid);//sha256(uid + token);
                 loadOrCreateWallet(uid, aesKey, onReady, onFail);
             } catch (Exception e) {
                 e.printStackTrace();
